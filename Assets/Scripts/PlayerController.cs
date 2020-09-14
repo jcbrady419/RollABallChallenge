@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
         countText.text= "Count: " + count.ToString ();
         if (count >= 12)
         {
-            winText.text = "You Win!";
+            winText.text = "You Win! Jacob Brady";
         }
     }
 }
