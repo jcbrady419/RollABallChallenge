@@ -77,6 +77,6 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
     }
     void SetLivesText ()
     {
-        livesText.text= "Lives: " + count.ToString ();
+        livesText.text = "Lives: " + lives.ToString
     }
 }
