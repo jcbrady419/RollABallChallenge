@@ -64,6 +64,12 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
             lives = lives - 1;
             SetLivesText ();
         }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.SetActive (false);
+            lives = lives - 1;
+            SetLivesText ();
+        }
         if (count == 12)
         {
     transform.position = new Vector3(50.0f, 0.0f, 50.0f); 
