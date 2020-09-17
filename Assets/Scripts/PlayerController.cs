@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
         winText.text = "";
         lives = 3;
         SetLivesText ();
+        
     }
 
     public void OnEnable() {
