@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
         {
             other.gameObject.SetActive (false);
             lives = lives - 1;
-            livesText
+            livesText.text = ""
         }
         if (count == 12)
         {
