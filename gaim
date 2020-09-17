@@ -1,6 +1,6 @@
  #!/usr/bin/env bash
 source .ucf/.env
-version=10
+version=12
 repourl=`git remote get-url origin` && len=`expr ${#repourl} - 4` && repository=`echo ${repourl} | cut -c29-$len`
 # First, let's add the .bin directory to the path.
 
@@ -14,9 +14,28 @@ if [ $# -ge 1 ]; then
   elif [ $1 = "init" ]; then
     git checkout working
     code --install-extension ./.ucf/gaim.vsix
-    code --uninstall-extension zeitnergmbh.auto-git >/dev/null
+    code --uninstall-extension 
     echo "Extension installed and current branch is now \"working\". Restart VS Code to begin."
     exit 0
+  elif [ $1 = "--reset-student" ]; then
+    ./gaim --reset-repo
+    output=`curl -s -X DELETE -o /dev/null  https://plato.mrl.ai:8081/git/student/$repository`
+    echo $output
+    exit 0
+  elif [ $1 = "--reset-repo" ]; then
+    echo "Resetting repository..."
+    template_url=`.ucf/class --template`
+    git remote add template $template_url
+    git fetch template
+    git stash
+    git checkout master
+    git branch -D working
+    git push -d origin working
+    git reset --hard template/master
+    git push --force
+    rm .ucf/.repo
+    output=`curl -s -X DELETE -o /dev/null  https://plato.mrl.ai:8081/git/repo/$repository`
+    echo $output
   elif [ ! -f ".ucf/.secret" -a $1 != 'register' -a $1 != 'reset' ]; then
     echo "This directory has not been set up yet."
     echo ""
@@ -34,7 +53,7 @@ if [ $# -ge 1 ]; then
     curl -s -o .ucf/class https://plato.mrl.ai:8081/git/gaim/$course/$assignmentid/class
     chmod +x .ucf/class
     .ucf/class upgrade
-    exit %?;
+    exit 0
   elif [[ $1 = "test" && -z $2 ]]; then
     echo "Please specify a stage to set up: ./gaim test <stage>:"
     echo " - 1: After the first video, with PlayerController, CameraController, and MiniGame scene."
@@ -121,16 +140,8 @@ EOF
       echo $extensions | grep -o "auto-git" >/dev/null
       if [ $? == 0 ]; then
         code --uninstall-extension zeitnergmbh.auto-git >/dev/null
-        rm -rf .autogit
       fi
       echo "Configuring GitHub Username and Email for this repository..."
-      os=`uname`
-      if [ $os = "Darwin" ]; then
-        stat_exit=`stat -f "%z" .ucf/.secret`
-      else
-        stat_exit=`stat --printf="%s" .ucf/.secret`
-      fi
-
       ghun=`git config user.name 2>/dev/null`
       ghem=`git config user.email 2>/dev/null`
       if [ ${#ghun} -le 2 ]; then
@@ -141,15 +152,7 @@ EOF
       fi
       git add .ucf/.secret >/dev/null 2>&1
       git commit -m "Secret" >/dev/null 2>&1
-      # Download all of the assets necessary...
-      if [ $assignmentid -eq 2 ]; then
-        curl -s --header "Content-Type: application/json" \
-    --header "secret: $secret" -o Assets.tar.gz https://plato.mrl.ai:8081/git/files/2/Assets.tar.gz
-        tar -xzf Assets.tar.gz
-        rm -rf Assets.tar.gz
-      fi
-      git push origin
-      git checkout -b working
+      git checkout -b working 
       git push -u origin working
       echo "All done! Reload this window (View > Command Pallette > Developer: Reload Window) to begin."
     else
