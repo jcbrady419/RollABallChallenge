@@ -2914,7 +2914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMarker: {fileID: 680290063}
   endMarker: {fileID: 259543499}
-  speed: 1
+  speed: 3
 --- !u!1 &1712174156
 GameObject:
   m_ObjectHideFlags: 0
@@ -3776,7 +3776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMarker: {fileID: 1151102320}
   endMarker: {fileID: 928208693}
-  speed: 5
+  speed: 3
 --- !u!4 &2081584501 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6512822778996747759, guid: 0b5877d44a5914822a79ef9581078fab, type: 3}
