@@ -80,5 +80,6 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
     void SetLivesText ()
     {
         livesText.text = "Lives: " + lives.ToString ();
+        
     }
 }
