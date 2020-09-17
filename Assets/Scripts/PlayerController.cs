@@ -83,6 +83,6 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
         if (lives <= 0)
         {
             loseText.text= "You Lose! Jacob Brady";
-         }
+        }
     }
 }
