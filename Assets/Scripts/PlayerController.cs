@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
     public Text countText;
     public Text winText;
     public Text livesText;
-    public Text 
+    public Text loseText;
     public RollABallControls controls;
     private Rigidbody rb;
     private int count;
