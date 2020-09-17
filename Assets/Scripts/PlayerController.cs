@@ -81,5 +81,8 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
     {
         livesText.text = "Lives: " + lives.ToString ();
         if (lives <= 0)
+        {
+            
+        }
     }
 }
