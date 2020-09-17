@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
         SetCountText ();
         winText.text = "";
         lives = 3;
-        livesText.text= ""
+        livesText.text= "Lives: "
     }
 
     public void OnEnable() {
