@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
             lives = lives - 1;
             SetLivesText ();
         }
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag(""))
         {
             other.gameObject.SetActive (false);
             lives = lives - 1;
