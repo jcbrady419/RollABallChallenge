@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Boxmover : MonoBehaviour
 // Transforms to act as start and end markers for the journey.
-public Transform startMarker;
+{
+    public Transform startMarker;
 public Transform endMarker;
 
 // Movement speed in units/sec.
