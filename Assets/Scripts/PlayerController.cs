@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour, RollABallControls.IPlayerActions
         if (count >= 20)
         {
             winText.text = "You Win! Jacob Brady";
+            Destroy(gameObject);
         }
     }
     void SetLivesText ()
